@@ -1,0 +1,27 @@
+<% content_for :page_title, "Forgot Your Password" %>
+
+<div class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="field">
+            <div class="control">
+              <label class="label">Email</label>
+              <%= f.email_field :email, required: true, autofocus: true, input_html: { autocomplete: "email" }, class: "input" %>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Send me reset password instructions" %>
+          </div>
+          <br />
+
+          <%= render "devise/shared/links" %>
+
+        <% end %>
+      </div>
+    </div>    
+  </div>
+</div>

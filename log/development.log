@@ -1,0 +1,579 @@
+Started GET "/" for ::1 at 2020-12-24 16:50:20 +0800
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (11.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
+        bin/rails db:migrate RAILS_ENV=development
+You have 8 pending migrations:
+20201223141056_create_posts.rb
+20201223145031_create_comments.rb
+20201223145236_add_post_id_to_comments.rb
+20201223152215_devise_create_admin_users.rb
+20201223152217_create_active_admin_comments.rb
+20201223152417_create_users.rb
+20201223153247_add_user_id_to_posts.rb
+20201224032855_devise_create_authentications.rb:
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePosts (20201223141056)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223141056"]]
+  [1m[36mTRANSACTION (11.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateComments (20201223145031)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "comment" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223145031"]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddPostIdToComments (20201223145236)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "comments" ADD "post_id" integer[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223145236"]]
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to DeviseCreateAdminUsers (20201223152215)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223152215"]]
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveAdminComments (20201223152217)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "namespace" varchar, "body" text, "resource_type" varchar, "resource_id" integer, "author_type" varchar, "author_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223152217"]]
+  [1m[36mTRANSACTION (10.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20201223152417)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223152417"]]
+  [1m[36mTRANSACTION (8.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToPosts (20201223153247)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_posts_on_user_id" ON "posts" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201223153247"]]
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to DeviseCreateAuthentications (20201224032855)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "authentications" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_authentications_on_email" ON "authentications" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_authentications_on_reset_password_token" ON "authentications" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20201224032855"]]
+  [1m[36mTRANSACTION (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-12-24 08:50:36.921713"], ["updated_at", "2020-12-24 08:50:36.921713"]]
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-12-24 16:50:49 +0800
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1187)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+yarn run v1.22.10
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+
+error Command "webpack" not found.
+
+  Rendered layout layouts/application.html.erb (Duration: 1709.1ms | Allocations: 346144)
+Completed 500 Internal Server Error in 1724ms (ActiveRecord: 0.2ms | Allocations: 351113)
+
+
+
+Webpacker::Manifest::MissingEntryError - Webpacker can't find application.js in /home/mawarfzl/bvblog/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}:
+
+Started GET "/" for ::1 at 2020-12-24 16:51:54 +0800
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1075)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+yarn run v1.22.10
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+
+error Command "webpack" not found.
+
+  Rendered layout layouts/application.html.erb (Duration: 983.9ms | Allocations: 33474)
+Completed 500 Internal Server Error in 994ms (ActiveRecord: 0.2ms | Allocations: 37367)
+
+
+
+Webpacker::Manifest::MissingEntryError - Webpacker can't find application.js in /home/mawarfzl/bvblog/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}:
+
+Started GET "/" for ::1 at 2020-12-24 16:54:15 +0800
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1075)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+yarn run v1.22.10
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+
+error Command "webpack" not found.
+
+  Rendered layout layouts/application.html.erb (Duration: 1146.6ms | Allocations: 36159)
+Completed 500 Internal Server Error in 1159ms (ActiveRecord: 0.2ms | Allocations: 42358)
+
+
+
+Webpacker::Manifest::MissingEntryError - Webpacker can't find application.js in /home/mawarfzl/bvblog/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}:
+
+Started GET "/" for ::1 at 2020-12-24 16:57:47 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 738)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/mawarfzl/bvblog/public/packs
+[Webpacker] Hash: 415a948d492e21802f43
+Version: webpack 4.44.2
+Time: 1605ms
+Built at: 12/24/2020 4:57:50 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-d5a3c3b4dce84b5eb605.js    125 KiB  application  [emitted] [immutable]  application
+js/application-d5a3c3b4dce84b5eb605.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-d5a3c3b4dce84b5eb605.js js/application-d5a3c3b4dce84b5eb605.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 492 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+  Rendered layout layouts/application.html.erb (Duration: 2948.0ms | Allocations: 10468)
+Completed 200 OK in 2949ms (Views: 2948.2ms | ActiveRecord: 0.2ms | Allocations: 10901)
+
+
+Started GET "/" for ::1 at 2020-12-24 16:58:19 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 730)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 9.0ms | Allocations: 8391)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.2ms | Allocations: 8862)
+
+
+Started GET "/" for ::1 at 2020-12-24 16:58:50 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 738)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 8389)
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.2ms | Allocations: 8867)
+
+
+Started GET "/authentications/sign_in" for ::1 at 2020-12-24 16:58:52 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 611)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 31.9ms | Allocations: 13016)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 38.3ms | Allocations: 20690)
+Completed 200 OK in 61ms (Views: 43.0ms | ActiveRecord: 0.6ms | Allocations: 31662)
+
+
+Started GET "/authentications/sign_up" for ::1 at 2020-12-24 16:58:55 +0800
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 220)
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | Allocations: 141)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1348)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 13.4ms | Allocations: 9684)
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 0.0ms | Allocations: 11057)
+
+
+Started GET "/authentications/sign_in" for ::1 at 2020-12-24 16:58:57 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 152)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 652)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | Allocations: 8389)
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 0.0ms | Allocations: 8978)
+
+
+Started POST "/authentications/sign_in" for ::1 at 2020-12-24 16:58:58 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mAuthentication Load (0.2ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."email" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.2ms | Allocations: 2048)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 150)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 642)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | Allocations: 8357)
+Completed 200 OK in 268ms (Views: 8.0ms | ActiveRecord: 0.0ms | Allocations: 9896)
+
+
+Started POST "/authentications/sign_in" for ::1 at 2020-12-24 16:59:02 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mAuthentication Load (0.3ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."email" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.3ms | Allocations: 1418)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 150)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 640)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | Allocations: 8351)
+Completed 200 OK in 260ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 8888)
+
+
+Started GET "/" for ::1 at 2020-12-24 16:59:05 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 732)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 16.2ms | Allocations: 8967)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.3ms | Allocations: 9436)
+
+
+Started GET "/" for ::1 at 2020-12-24 16:59:41 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 730)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 8396)
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.2ms | Allocations: 8860)
+
+
+Started GET "/authentications/sign_in" for ::1 at 2020-12-24 16:59:43 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 150)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 644)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 8379)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.0ms | Allocations: 8968)
+
+
+Started POST "/authentications/sign_in" for ::1 at 2020-12-24 16:59:44 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."email" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.1ms | Allocations: 1460)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 150)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 640)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | Allocations: 8350)
+Completed 200 OK in 258ms (Views: 7.6ms | ActiveRecord: 0.0ms | Allocations: 8910)
+
+
+Started POST "/authentications/sign_in" for ::1 at 2020-12-24 16:59:45 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."email" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.1ms | Allocations: 1418)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 150)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 640)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 8348)
+Completed 200 OK in 257ms (Views: 8.0ms | ActiveRecord: 0.0ms | Allocations: 8884)
+
+
+Started GET "/authentications/sign_up" for ::1 at 2020-12-24 16:59:48 +0800
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 41)
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 102)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 690)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 8427)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 8952)
+
+
+Started POST "/authentications" for ::1 at 2020-12-24 16:59:59 +0800
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "authentication"=>{"email"=>"mawar@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAuthentication Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "authentications" WHERE "authentications"."email" = ? LIMIT ?[0m  [["email", "mawar@gmail.com"], ["LIMIT", 1]]
+  [1m[36mAuthentication Create (0.3ms)[0m  [1m[32mINSERT INTO "authentications" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "mawar@gmail.com"], ["encrypted_password", "$2a$12$pAXC5lJxSnjXUir96FXONuFmhpIx/ApPUzs7iILCVQjYGbSYBPKLi"], ["created_at", "2020-12-24 09:00:00.214052"], ["updated_at", "2020-12-24 09:00:00.214052"]]
+  [1m[36mTRANSACTION (8.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 284ms (ActiveRecord: 9.2ms | Allocations: 10293)
+
+
+Started GET "/" for ::1 at 2020-12-24 17:00:00 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 729)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mAuthentication Load (0.2ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered layouts/_alerts.html.erb (Duration: 0.4ms | Allocations: 139)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 9520)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.3ms | Allocations: 9998)
+
+
+Started GET "/posts/new" for ::1 at 2020-12-24 17:00:12 +0800
+Processing by PostsController#new as HTML
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 20.0ms | Allocations: 14568)
+  Rendered posts/new.html.erb within layouts/application (Duration: 20.7ms | Allocations: 14889)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 36.8ms | Allocations: 22500)
+Completed 200 OK in 44ms (Views: 37.4ms | ActiveRecord: 0.5ms | Allocations: 26977)
+
+
+Started POST "/posts" for ::1 at 2020-12-24 17:00:25 +0800
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"title"=>"Hi", "content"=>"Hello this is my first post."}, "commit"=>"Create Post"}
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:16:in `create'
+  [1m[36mPost Create (0.2ms)[0m  [1m[32mINSERT INTO "posts" ("title", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Hi"], ["content", "Hello this is my first post."], ["created_at", "2020-12-24 09:00:25.184766"], ["updated_at", "2020-12-24 09:00:25.184766"]]
+  ↳ app/controllers/posts_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:16:in `create'
+Redirected to http://localhost:3000/posts/1
+Completed 302 Found in 17ms (ActiveRecord: 7.4ms | Allocations: 5766)
+
+
+Started GET "/posts/1" for ::1 at 2020-12-24 17:00:25 +0800
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:50:in `find_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:33
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:34
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 11)
+  Rendered comments/_form.html.erb (Duration: 16.1ms | Allocations: 12870)
+  Rendered posts/show.html.erb within layouts/application (Duration: 34.4ms | Allocations: 21496)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mAuthentication Load (0.2ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered layout layouts/application.html.erb (Duration: 44.5ms | Allocations: 29823)
+Completed 200 OK in 48ms (Views: 44.0ms | ActiveRecord: 1.2ms | Allocations: 31032)
+
+
+Started POST "/posts/1/comments" for ::1 at 2020-12-24 17:00:38 +0800
+Processing by CommentsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "comment"=>{"name"=>"Mawar Faizal", "comment"=>"Nice blog."}, "commit"=>"Leave a reply", "post_id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:6:in `create'
+  [1m[36mComment Create (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("name", "comment", "created_at", "updated_at", "post_id") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Mawar Faizal"], ["comment", "Nice blog."], ["created_at", "2020-12-24 09:00:38.255902"], ["updated_at", "2020-12-24 09:00:38.255902"], ["post_id", 1]]
+  ↳ app/controllers/comments_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comments_controller.rb:6:in `create'
+Redirected to http://localhost:3000/posts/1
+Completed 302 Found in 24ms (ActiveRecord: 12.7ms | Allocations: 5502)
+
+
+Started GET "/posts/1" for ::1 at 2020-12-24 17:00:38 +0800
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:50:in `find_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:33
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:34
+  Rendered collection of comments/_comment.html.erb [1 times] (Duration: 0.7ms | Allocations: 316)
+  Rendered comments/_form.html.erb (Duration: 8.0ms | Allocations: 7866)
+  Rendered posts/show.html.erb within layouts/application (Duration: 12.8ms | Allocations: 10157)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | Allocations: 18478)
+Completed 200 OK in 23ms (Views: 20.9ms | ActiveRecord: 0.4ms | Allocations: 19436)
+
+
+Started GET "/" for ::1 at 2020-12-24 17:00:41 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 781)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mAuthentication Load (0.2ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:17
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | Allocations: 9773)
+Completed 200 OK in 21ms (Views: 19.6ms | ActiveRecord: 0.4ms | Allocations: 10245)
+
+
+Started DELETE "/authentications/sign_out" for ::1 at 2020-12-24 17:00:46 +0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mAuthentication Load (0.1ms)[0m  [1m[34mSELECT "authentications".* FROM "authentications" WHERE "authentications"."id" = ? ORDER BY "authentications"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 0.1ms | Allocations: 6353)
+
+
+Started GET "/" for ::1 at 2020-12-24 17:00:46 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 781)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_alerts.html.erb (Duration: 0.2ms | Allocations: 42)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 8526)
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.2ms | Allocations: 8997)
+
+
+Started GET "/" for ::1 at 2020-12-24 17:00:50 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 780)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 8420)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.2ms | Allocations: 8887)
+
+
+Started GET "/posts/1" for ::1 at 2020-12-24 17:00:51 +0800
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:50:in `find_post'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:33
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = ?[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:34
+  Rendered collection of comments/_comment.html.erb [1 times] (Duration: 0.3ms | Allocations: 160)
+  Rendered comments/_form.html.erb (Duration: 7.6ms | Allocations: 7870)
+  Rendered posts/show.html.erb within layouts/application (Duration: 11.6ms | Allocations: 9843)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 21.3ms | Allocations: 17413)
+Completed 200 OK in 23ms (Views: 21.6ms | ActiveRecord: 0.3ms | Allocations: 18370)
+
+
+Started DELETE "/posts/1/comments/1" for ::1 at 2020-12-24 17:00:56 +0800
+Processing by CommentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post_id"=>"1", "id"=>"1"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 269)
+
+
+Started GET "/authentications/sign_in" for ::1 at 2020-12-24 17:00:56 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 152)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 652)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 8.3ms | Allocations: 8390)
+Completed 200 OK in 10ms (Views: 8.8ms | ActiveRecord: 0.0ms | Allocations: 8987)
+
+
+Started GET "/" for ::1 at 2020-12-24 17:00:57 +0800
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" ORDER BY created_at DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 4], ["OFFSET", 0]]
+  ↳ app/views/posts/index.html.erb:5
+  Rendered posts/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 780)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 13.3ms | Allocations: 9007)
+Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.2ms | Allocations: 9477)
+
+
