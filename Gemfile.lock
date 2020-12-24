@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/activeadmin/inherited_resources.git
-  revision: 689df3d543a7401019308d258a512b6c1b36e513
+  revision: ee29d339e73213985fd0c0731948ea406668c2a4
   specs:
     inherited_resources (1.12.0)
       actionpack (>= 5.2, < 6.2)
@@ -90,7 +90,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
-    binding_of_caller (0.7.3)
+    binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
