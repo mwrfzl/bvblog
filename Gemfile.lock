@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/activeadmin/inherited_resources.git
-  revision: ee29d339e73213985fd0c0731948ea406668c2a4
+  revision: 610f2c6cb895adf5e35b510a76bfeddaae985afc
   specs:
     inherited_resources (1.12.0)
       actionpack (>= 5.2, < 6.2)
@@ -305,7 +305,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.0.1)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -363,7 +362,7 @@ DEPENDENCIES
   inherited_resources!
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  pg (~> 1.2, >= 1.2.3)
+  pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.0)
@@ -371,7 +370,6 @@ DEPENDENCIES
   selenium-webdriver
   simple_form (~> 5.0, >= 5.0.3)
   spring
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

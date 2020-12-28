@@ -44,7 +44,7 @@ end
 group :development, :test do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
-  gem 'sqlite3'
+  gem 'pg'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
@@ -54,11 +54,6 @@ group :development, :test do
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'guard', '~> 2.16', '>= 2.16.2'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
-end
-
-group :production do
-  gem 'pg', '~> 1.2', '>= 1.2.3'
-  gem 'rails_12factor', '~> 0.0.3'
 end
 
 group :test do
