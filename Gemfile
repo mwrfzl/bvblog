@@ -34,7 +34,8 @@ gem 'binding_of_caller'
 gem 'activeadmin', '~> 2.9'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise', '~> 4.7', '>= 4.7.3'
-gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+# gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

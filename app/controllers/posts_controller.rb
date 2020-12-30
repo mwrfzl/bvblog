@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 	 before_action :correct_authentication, only: [:edit, :update, :destroy]
 
 	def index
-		@posts = Post.paginate(page: params[:page], per_page: 4).order("created_at DESC")
+		@posts = Post.order("created_at DESC").page params[:page]
 	end
 
 	def new

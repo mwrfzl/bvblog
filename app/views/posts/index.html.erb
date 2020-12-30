@@ -16,11 +16,10 @@
         </div>
       </div>
     <% end %>
-
   </div>
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li><%= paginate @posts %></li>
+    </ul>
+  </nav>
 </section>
-<nav class="pagination is-rounded is-centered">
-  <li class="pagination-list">
-    <%= will_paginate @posts, :container => false %>
-  </li>
-</nav>
